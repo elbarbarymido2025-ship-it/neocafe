@@ -1,0 +1,72 @@
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Neo Cafe | Admin</title>
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: Arial
+        }
+
+        h2 {
+            text-align: center;
+            color: #00ffd5
+        }
+
+        .table {
+            max-width: 800px;
+            margin: 40px auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th,
+        td {
+            border: 1px solid #00ffd5;
+            padding: 10px;
+            text-align: center
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #00ffd5;
+            border: none;
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body>
+    <h2>طلبات العملاء</h2>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>المشروب</th>
+                    <th>الكمية</th>
+                    <th>السعر</th>
+                    <th>العنوان</th>
+                </tr>
+            </thead>
+            <tbody id="orders"></tbody>
+        </table>
+        <button onclick="clearOrders()">مسح الطلبات</button>
+    </div>
+    <script>
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let tbody = document.getElementById('orders');
+        orders.forEach(o => {
+            let tr = document.createElement('tr');
+            tr.innerHTML = `<td>${o.drink}</td><td>${o.qty}</td><td>${o.total}</td><td>${o.address}</td>`;
+            tbody.appendChild(tr);
+        });
+        function clearOrders() { localStorage.removeItem('orders'); location.reload(); }
+    </script>
+</body>
+
+</html>
