@@ -1,0 +1,13 @@
+<script>
+    function saveOrder() {
+        let drinkText = document.getElementById('drink').selectedOptions[0].text;
+        let price = document.getElementById('drink').value;
+        let qty = document.getElementById('qty').value;
+        let address = document.querySelector('input[type=text]').value;
+        let total = price * qty;
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push({ drink: drinkText, qty: qty, total: total + ' جنيه', address: address });
+        localStorage.setItem('orders', JSON.stringify(orders));
+        alert('تم حفظ الطلب بنجاح ☕');
+    }
+</script>
